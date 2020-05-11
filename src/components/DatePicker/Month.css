@@ -1,0 +1,12 @@
+.table_wrapper {
+    padding: 1rem;
+    color: #005499;
+}
+table th {
+    padding: .8rem;
+    color: #a0a0a0;
+    font-weight: 600;
+}
+.table_header {
+    padding: 1rem;
+}

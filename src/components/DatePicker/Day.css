@@ -1,0 +1,17 @@
+
+.cell:hover {
+    cursor: default;
+
+}
+.cell_content {
+    padding: .8rem;
+    margin: 0 .3rem;
+    text-align: center;
+    vertical-align: middle;
+    color: #00457d;
+    border-radius: 50%;
+}
+.cell_content.hoverable:hover {
+    background-color: #3fd3eb;
+    color: #fff;
+}
