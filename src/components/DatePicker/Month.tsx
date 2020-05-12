@@ -5,8 +5,10 @@ import Week from './Week'
 import styles from './Month.css?module'
 import { IMonth } from '@/models/Month.model';
 import { IWeek } from '@/models/Week.model';
+import { IDay } from '@/models/Day.model';
 
 interface Props {
+    currentDate: Date | undefined
     currentMonth: IMonth | undefined
     currentYear: number | undefined
     defaultWeek: IWeek[]
@@ -15,6 +17,8 @@ interface Props {
 @Component
 export default class Month extends VueComponent<Props> {
 
+    @Prop() 
+    private currentDate!: Date
     @Prop() 
     private currentMonth!: IMonth
     @Prop() 
@@ -58,8 +62,11 @@ export default class Month extends VueComponent<Props> {
                 countDays++
             }
         }
-        console.log(result)
         return result
+    }
+
+    onDateSelect(day: IDay) {
+        this.$emit('date-selected', day)
     }
 
     render() {
@@ -82,10 +89,12 @@ export default class Month extends VueComponent<Props> {
                         { this.weeksInMonth.map((week: any, index: number) => {
                             return (
                                 <Week 
+                                    currentDate={this.currentDate}
                                     weekArray={week}
                                     weekOrder={index + 1}
                                     defaultWeek={this.defaultWeek}
                                     daysInMonth={this.daysInMonth}
+                                    on-date-selected={this.onDateSelect}
                                 />
                             )
                         }) }

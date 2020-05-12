@@ -5,6 +5,7 @@ import { IDay } from '@/models/Day.model'
 import Day from './Day'
 
 interface Props {
+    currentDate: Date | undefined
     weekArray: IDay | undefined
     defaultWeek: IWeek[] | undefined
     daysInMonth: number,
@@ -14,6 +15,8 @@ interface Props {
 @Component
 export default class Week extends VueComponent<Props> {
 
+    @Prop()
+    private currentDate!: Date
     @Prop() 
     private weekArray!: any[]
     @Prop() 
@@ -23,12 +26,22 @@ export default class Week extends VueComponent<Props> {
     @Prop()
     private weekOrder!: number
 
+    onDateSelect(day: IDay) {
+        this.$emit('date-selected', day)
+    }
+
+    
+
     render() {
         return (
             <tr>
                 { this.weekArray.map((day: IDay, index: number) => {
                     return (
-                        <Day day={day} />
+                        <Day 
+                            day={day} 
+                            on-date-selected={this.onDateSelect}
+                            currentDate={this.currentDate} 
+                        />
                     )
                 }) }
             </tr>

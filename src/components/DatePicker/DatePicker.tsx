@@ -5,13 +5,17 @@ import { IMonth } from '@/models/Month.model'
 import { IWeek } from '@/models/Week.model';
 
 import styles from './DatePicker.css?module'
+import { IDay } from '@/models/Day.model';
 
 interface Props {
-  
+  currentDate: Date | undefined
 }
 
 @Component
 export default class DatePicker extends VueComponent<Props> {
+
+  @Prop()
+  private currentDate!: Date
 
   public months: IMonth[] = [
     { order: 0, name: 'Январь' },
@@ -39,8 +43,6 @@ export default class DatePicker extends VueComponent<Props> {
 
   ]
 
-  public currentDate: Date = new Date()
-
   get currentMonth() {
     return this.months.find(month => month.order === this.currentDate.getMonth())
   }
@@ -49,14 +51,20 @@ export default class DatePicker extends VueComponent<Props> {
     return this.currentDate.getFullYear()
   }
 
+  onDateSelect(day: IDay) {
+    this.$emit('date-selected', day)
+  }
+
 
   render() {
     return (
       <div class={styles.wrapper}>
         <Month 
+          currentDate={this.currentDate}
           currentMonth={this.currentMonth}
           currentYear={this.currentYear}
           defaultWeek={this.defaultWeek}
+          on-date-selected={this.onDateSelect}
         />
       </div>
     )

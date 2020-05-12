@@ -9,9 +9,13 @@
     text-align: center;
     vertical-align: middle;
     color: #00457d;
+    font-size: 90%;
     border-radius: 50%;
 }
-.cell_content.hoverable:hover {
+.cell_content.hoverable:hover, .selected {
     background-color: #3fd3eb;
     color: #fff;
+}
+.has_todos {
+    color: #942424 !important;
 }
